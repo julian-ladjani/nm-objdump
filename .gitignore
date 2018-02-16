@@ -1,0 +1,11 @@
+.idea
+kernel_include/*
+*~*
+*#*
+.DS_STORE
+CMake*
+cmake*
+nm
+objdump
+a.out
+*.txt
