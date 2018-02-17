@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <elf.h>
 #include <sys/stat.h>
+#include <global_struct.h>
+#include "linked_list.h"
 #include "global_define.h"
 #include "global_function.h"
 
@@ -24,52 +26,7 @@ void get_files(char **filepath_tab, int tab_size)
 	}
 }
 
-char            print_type(Elf64_Sym sym, Elf64_Shdr *shdr)
-{
-	char  c;
-
-	if (ELF64_ST_BIND(sym.st_info) == STB_GNU_UNIQUE)
-		c = 'u';
-	else if (ELF64_ST_BIND(sym.st_info) == STB_WEAK)
-	{
-		c = 'W';
-		if (sym.st_shndx == SHN_UNDEF)
-			c = 'w';
-	}
-	else if (ELF64_ST_BIND(sym.st_info) == STB_WEAK && ELF64_ST_TYPE(sym.st_info) == STT_OBJECT)
-	{
-		c = 'V';
-		if (sym.st_shndx == SHN_UNDEF)
-			c = 'v';
-	}
-	else if (sym.st_shndx == SHN_UNDEF)
-		c = 'U';
-	else if (sym.st_shndx == SHN_ABS)
-		c = 'A';
-	else if (sym.st_shndx == SHN_COMMON)
-		c = 'C';
-	else if (shdr[sym.st_shndx].sh_type == SHT_NOBITS
-		 && shdr[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE))
-		c = 'B';
-	else if (shdr[sym.st_shndx].sh_type == SHT_PROGBITS
-		 && shdr[sym.st_shndx].sh_flags == SHF_ALLOC)
-		c = 'R';
-	else if (shdr[sym.st_shndx].sh_type == SHT_PROGBITS
-		 && shdr[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE))
-		c = 'D';
-	else if (shdr[sym.st_shndx].sh_type == SHT_PROGBITS
-		 && shdr[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR))
-		c = 'T';
-	else if (shdr[sym.st_shndx].sh_type == SHT_DYNAMIC)
-		c = 'D';
-	else
-		c = '?';
-	if (ELF64_ST_BIND(sym.st_info) == STB_LOCAL && c != '?')
-		c += 32;
-	return c;
-}
-
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
 	int fd;
 	void *buf;
@@ -78,8 +35,7 @@ int main(int argc, char **argv)
 	Elf64_Sym *symbol;
 	int offset = 0;
 	int offset_sym_section = 0;
-	int offset_sym = 0;
-	char *name;
+	symbol_t *symbol_struct;
 
 	fd = get_next_file(argv, argc, &offset);
 	fd = get_next_file(argv, argc, &offset);
@@ -87,56 +43,42 @@ int main(int argc, char **argv)
 	elf = buf;
 	symbol_section = get_next_symbol_section(buf, VAL64BITS,
 						 &offset_sym_section);
-	symbol = get_next_symbol(buf, symbol_section, VAL64BITS, &offset_sym);
-	while (symbol != PTR_END_RETURN) {
-		if (symbol->st_value != 0)
-			printf("%016lx ",
-			       symbol->st_value);
-		else
-			printf("                 ");
-		printf("%c ", print_type(*symbol, get_section_header(elf,
-								     VAL64BITS)));
-		name = get_symbol_name(elf, VAL64BITS, offset_sym_section - 1,
-				       symbol->st_name);
-		if (name != NULL)
-			printf("%s\n", name);
-		else
-			printf("\n");
-		symbol = get_next_symbol(buf, symbol_section, VAL64BITS,
-					 &offset_sym);
+	symbol_struct = get_symbol_struct(elf, VAL64BITS, symbol_section,
+					  offset_sym_section - 1);
+	for (int i = 0; i < get_symbol_number(symbol_section, VAL64BITS); i++) {
+		if (symbol_struct[i].name != NULL) {
+			if (symbol_struct[i].address != 0)
+				printf("%016lx ",
+				       symbol_struct[i].address);
+			else
+				printf("                 ");
+			printf("%c ", 'A');
+			printf("%s\n", symbol_struct[i].name);
+		}
 	}
-}
+	printf("%d\n", sizeof(symbol_struct) / sizeof(symbol_t));
+	free(symbol_struct);
+}*/
 
-/*
- * if (buf != PTR_ERROR_RETURN) {
-		printf("mmap(%s) : %8p\n", argv[1], buf);
-		printf("elf size: %ld buf size: %ld\n", sizeof(*elf),
-		       sizeof(buf));
-		elf = buf;
-		printf("Section Header Table : addr = %08lx, nb = %d\n",
-		       elf->e_shoff, elf->e_shnum);
-		shdr = buf + elf->e_shoff;
-		phdr = buf + elf->e_phoff;
-		for (int i = 0; i < elf->e_shnum; i++)
-			if (shdr[i].sh_type == SHT_SYMTAB) {
-				sym = (Elf64_Sym *) (buf + shdr[i].sh_offset);
-				for (int j = 0; j < (shdr[i].sh_size / shdr[i]
-					.sh_entsize); j++) {
-					if (sym->st_name > SHN_UNDEF &&
-						sym->st_info !=  4) {
-						//printf("%u ", sym->st_size);
-						if (sym->st_value != 0)
-							printf("%016lx ",
-							       sym->st_value);
-						else
-							printf("                 ");
-						printf("%u ", sym->st_info);
-						printf("%s\n",
-						       get_symbol_name(elf,
-								       VAL64BITS, i, sym->st_name));
-					}
-					sym++;
-				}
-			}
+int main(int ac, char **av)
+{
+	list_t *list = NULL;
+	list_t *tmp_list;
+	for (int idx = 0; idx < ac; idx++) {
+		list = list_add_elem_at_pos(list, av[idx], LIST_END);
 	}
- */
+	//list_swap(list->next, list->next->next->next);
+	//list_clean_at_pos(list, LIST_BEFORE);
+	//list = list_sort(list, strcmp);
+	list = list_delete_at_pos(list, LIST_AFTER);
+	tmp_list = list;
+	while (list != NULL) {
+		if (list->elem == NULL)
+			printf("%s\n", "deleted");
+		else
+			printf("%s\n", list->elem);
+		list = list->next;
+	}
+	list_delete_all(tmp_list);
+	//printf("%s\n", list_get_elem_at_pos(list, 1)->elem);
+}
