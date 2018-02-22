@@ -72,8 +72,8 @@ static symbol_t *get_symbol_struct_low(void *elf,
 		symbol[idx].address = low_symbol->st_value;
 		symbol[idx].info = low_symbol->st_info;
 		symbol[idx].type = get_type_low(low_symbol,
-						 get_section_header(elf, info),
-						 info);
+						get_section_header(elf, info),
+						info);
 		symbol[idx].architecture = info->architecture;
 		symbol[idx].name = get_symbol_name(elf, info,
 						   section_index,

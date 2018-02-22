@@ -11,7 +11,7 @@
 #include "global_struct.h"
 #include "global_function.h"
 
- int strcmp_alphanum(char const *a, char const *b)
+int strcmp_alphanum(char const *a, char const *b)
 {
 	int index_a = 0;
 	int index_b = 0;

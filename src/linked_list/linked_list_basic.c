@@ -52,12 +52,10 @@ list_t *list_sort(list_t *list,
 		if (cmp > 0) {
 			list_swap(elem, elem->next);
 			elem = list_get_elem_at_pos(list, LIST_FIRST);
-		}
-		else if (cmp > 0) {
+		} else if (cmp > 0) {
 			list_swap(elem->next, elem);
 			elem = list_get_elem_at_pos(list, LIST_FIRST);
-		}
-		else
+		} else
 			elem = elem->next;
 	}
 	return (list_get_elem_at_pos(list, LIST_FIRST));
