@@ -35,7 +35,8 @@ typedef struct list_s {
 //basics
 
 void list_dump(list_t *list, void (*dump_function)(void *));
-list_t *list_sort(list_t *list, int (*comp_function)(void *, void *));
+list_t *list_sort(list_t *list,
+		  int (*comp_function)(const void *, const void *));
 int list_size(list_t *list);
 void list_swap(list_t *a, list_t *b);
 
@@ -57,11 +58,12 @@ list_t *list_add_elem_at_pos_releasably(list_t *list, void *elem, int pos,
 
 //delete
 
-list_t *list_delete_after(list_t *elem);
-list_t *list_delete_before(list_t *elem);
-list_t *list_delete_elem(list_t *elem);
-list_t *list_delete_all(list_t *list);
-list_t *list_delete_at_pos(list_t *list, int pos);
+list_t *list_delete_after(list_t *elem, void (*clean_func)(void *elem));
+list_t *list_delete_before(list_t *elem, void (*clean_func)(void *elem));
+list_t *list_delete_elem(list_t *elem, void (*clean_func)(void *elem));
+list_t *list_delete_all(list_t *list, void (*clean_func)(void *elem));
+list_t *list_delete_at_pos(list_t *list, int pos,
+			   void (*clean_func)(void *elem));
 
 //clean
 

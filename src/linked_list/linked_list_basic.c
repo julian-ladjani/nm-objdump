@@ -40,16 +40,21 @@ void list_swap(list_t *a, list_t *b)
 	b->prev = tmp;
 }
 
-list_t *list_sort(list_t *list, int (*comp_function)(void *, void *))
+list_t *list_sort(list_t *list,
+		  int (*comp_function)(const void *, const void *))
 {
 	list_t *elem;
 	int cmp;
 
-	elem = list_get_elem_at_pos(list, LIST_FIRST);;
+	elem = list_get_elem_at_pos(list, LIST_FIRST);
 	while (elem != NULL && elem->next != NULL) {
 		cmp = comp_function(elem->elem, elem->next->elem);
 		if (cmp > 0) {
 			list_swap(elem, elem->next);
+			elem = list_get_elem_at_pos(list, LIST_FIRST);
+		}
+		else if (cmp > 0) {
+			list_swap(elem->next, elem);
 			elem = list_get_elem_at_pos(list, LIST_FIRST);
 		}
 		else

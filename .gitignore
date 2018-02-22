@@ -9,3 +9,4 @@ nm
 objdump
 a.out
 *.txt
+test/*
