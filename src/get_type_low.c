@@ -68,7 +68,9 @@ static char get_type_shdr_low(Elf32_Sym *sym, Elf32_Shdr *shdr, char c)
 	return ('T');
 }
 
-char get_type_low(Elf32_Sym *sym, Elf32_Shdr *shdr, elf_header_t *info)
+char get_type_low(Elf32_Sym *sym,
+		  Elf32_Shdr *shdr,
+		  __attribute__((unused)) elf_header_t *info)
 {
 	char c = INT_CONTINUE;
 

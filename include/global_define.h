@@ -16,7 +16,6 @@
 #define PTR_END_RETURN ((void *) -2)
 
 #define DEFAULT_FILE "a.out"
-#define PROGRAM_NAME "nm"
 
 typedef char byte_t;
 

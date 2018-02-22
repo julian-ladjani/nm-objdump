@@ -6,7 +6,8 @@ kernel_include/*
 CMake*
 cmake*
 nm
-objdump
+my_objdump
 a.out
 *.txt
 test/*
+obj/*

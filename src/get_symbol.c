@@ -37,7 +37,7 @@ void *get_next_symbol_section(void *elf, elf_header_t *info, int *offset)
 
 static void *get_next_symbol_low(Elf32_Ehdr *elf,
 				 Elf32_Shdr *symbol_section,
-				 elf_header_t *info,
+				 __attribute__((unused)) elf_header_t *info,
 				 int *offset)
 {
 	Elf32_Sym *symbol =
@@ -54,7 +54,7 @@ static void *get_next_symbol_low(Elf32_Ehdr *elf,
 
 static void *get_next_symbol_high(Elf64_Ehdr *elf,
 				  Elf64_Shdr *symbol_section,
-				  elf_header_t *info,
+				  __attribute__((unused)) elf_header_t *info,
 				  int *offset)
 {
 	Elf64_Sym *symbol =

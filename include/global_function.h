@@ -41,6 +41,7 @@ list_t *get_symbol_list(void *elf,
 			elf_header_t *info);
 int count_file(char **file_path_tab, int tab_size);
 int char_is_letter(char c);
+int check_file(int fd, elf_header_t *info);
 char get_type_high(Elf64_Sym *sym, Elf64_Shdr *shdr, elf_header_t *info);
 char get_type_low(Elf32_Sym *sym, Elf32_Shdr *shdr, elf_header_t *info);
 int get_symbol_number(void *symbol_section, elf_header_t *info);

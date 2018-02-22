@@ -1,0 +1,57 @@
+CC = gcc
+
+RM = rm -f
+
+CFLAGS += -D PROGRAM_NAME=\"$(NAME)\" -I include/ -Wall -Wextra
+
+CPPFLAGS += -I include/ -Wall -Wextra
+
+NAME = nm
+
+SRCS 	= 	src/fill_symbol_struct.c					\
+			src/get_header.c							\
+			src/get_section.c							\
+			src/get_string.c							\
+			src/get_symbol.c 							\
+			src/get_symbol_list.c						\
+			src/get_symbol_struct.c						\
+			src/get_type_high.c							\
+			src/get_type_low.c							\
+			src/check_file.c							\
+			src/read_file.c								\
+			src/string_generic_function.c				\
+			src/nm/main.c 								\
+			src/linked_list/linked_list_add.c			\
+			src/linked_list/linked_list_advanced.c 		\
+			src/linked_list/linked_list_basic.c 		\
+			src/linked_list/linked_list_conditional.c	\
+			src/linked_list/linked_list_create.c		\
+			src/linked_list/linked_list_delete.c		\
+			src/linked_list/linked_list_get.c			\
+			src/linked_list/list_clean.c				\
+
+OBJDIR = obj/
+
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
+
+$(OBJDIR)/%.o : %.c
+	mkdir -p $(OBJDIR)
+	mkdir -p $(@D)
+	$(CC) -c -fPIC $< -o $@ $(CFLAGS)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(CFLAGS)
+
+clean:
+	$(RM) $(OBJS)
+	$(RM) -r $(OBJDIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
+

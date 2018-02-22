@@ -24,13 +24,6 @@ int get_symbol_number(void *symbol_section, elf_header_t *info)
 	return (low_symbol_section->sh_size / low_symbol_section->sh_entsize);
 }
 
-char print_type(Elf64_Sym sym, Elf64_Shdr *shdr)
-{
-	char c = 'A';
-
-	return c;
-}
-
 static symbol_t *get_symbol_struct_high(void *elf,
 					Elf64_Shdr *symbol_section,
 					elf_header_t *info,

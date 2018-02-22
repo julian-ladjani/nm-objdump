@@ -68,7 +68,9 @@ static char get_type_shdr_high(Elf64_Sym *sym, Elf64_Shdr *shdr, char c)
 	return ('T');
 }
 
-char get_type_high(Elf64_Sym *sym, Elf64_Shdr *shdr, elf_header_t *info)
+char get_type_high(Elf64_Sym *sym,
+		   Elf64_Shdr *shdr,
+		   __attribute__((unused)) elf_header_t *info)
 {
 	char c = INT_CONTINUE;
 
