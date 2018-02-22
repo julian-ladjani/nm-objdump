@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <global_struct.h>
 #include "global_struct.h"
 #include "global_function.h"
 
@@ -24,7 +25,8 @@ void print_list(void *elem)
 
 	if (symbol->name != NULL && symbol->info != 4) {
 		nb_address_char = (symbol->architecture == VAL64BITS) ? 16 : 8;
-		if (symbol->address != 0)
+		if (symbol->type != 'w' && symbol->type != 'U' &&
+			symbol->type != 'u')
 			printf("%0*lx ", nb_address_char,
 				symbol->address);
 		else
