@@ -42,9 +42,9 @@ list_t *list_add_elem_at_pos(list_t *list, void *elem, int pos)
 }
 
 list_t *list_add_elem_at_pos_releasably(list_t *list,
-					void *elem,
-					int pos,
-					list_releasably_t releasably)
+	void *elem,
+	int pos,
+	list_releasably_t releasably)
 {
 	list_t *new_elem = malloc(sizeof(list_t));
 	list_t *elem_at_pos;
@@ -69,9 +69,9 @@ list_t *list_add_elem_at_pos_releasably(list_t *list,
 }
 
 list_t *list_add_elem_at_pos_alloc(list_t *list,
-				   void *elem,
-				   int pos,
-				   size_t elem_size)
+	void *elem,
+	int pos,
+	size_t elem_size)
 {
 	list_byte_t *new_elem = NULL;
 
@@ -80,17 +80,17 @@ list_t *list_add_elem_at_pos_alloc(list_t *list,
 		memcpy(new_elem, elem, elem_size);
 	}
 	return (list_add_elem_at_pos_releasably(list, new_elem, pos,
-						LIST_RELEASABLE));
+		LIST_RELEASABLE));
 }
 
 list_t *list_add_tab(list_t *list,
-		     list_byte_t *tab,
-		     size_t elem_size,
-		     size_t nb_elem)
+	list_byte_t *tab,
+	size_t elem_size,
+	size_t nb_elem)
 {
 	for (size_t idx = 0; idx < nb_elem; idx++) {
 		list = list_add_elem_at_pos_alloc(list, tab, LIST_END,
-						  elem_size);
+			elem_size);
 		tab += elem_size;
 	}
 	return (list);

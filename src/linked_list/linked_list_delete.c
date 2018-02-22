@@ -20,7 +20,7 @@ list_t *list_delete_after(list_t *elem, void (*clean_func)(void *elem))
 		if (elem_after->prev != NULL)
 			elem_after->prev->next = elem_after->next;
 		if (elem_after->releasable == LIST_RELEASABLE &&
-		    clean_func != NULL)
+			clean_func != NULL)
 			clean_func(elem_after->elem);
 		elem_after->elem = NULL;
 		tmp_elem = elem_after;
@@ -43,7 +43,7 @@ list_t *list_delete_before(list_t *elem, void (*clean_func)(void *elem))
 		if (elem_before->prev != NULL)
 			elem_before->prev->next = elem_before->next;
 		if (elem_before->releasable == LIST_RELEASABLE &&
-		    clean_func != NULL)
+			clean_func != NULL)
 			clean_func(elem_before->elem);
 		elem_before->elem = NULL;
 		tmp_elem = elem_before;
@@ -93,8 +93,8 @@ list_t *list_delete_all(list_t *list, void (*clean_func)(void *elem))
 }
 
 list_t *list_delete_at_pos(list_t *list,
-			   int pos,
-			   void (*clean_func)(void *elem))
+	int pos,
+	void (*clean_func)(void *elem))
 {
 	if (list == NULL)
 		return (NULL);

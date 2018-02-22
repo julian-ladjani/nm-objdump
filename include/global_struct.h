@@ -6,11 +6,11 @@
 */
 
 #ifndef PSU_2017_NMOBJDUMP_GLOBAL_STRUCT_H
-#define PSU_2017_NMOBJDUMP_GLOBAL_STRUCT_H
+	#define PSU_2017_NMOBJDUMP_GLOBAL_STRUCT_H
 
-#include <stdint.h>
-#include <unistd.h>
-#include "global_define.h"
+	#include <stdint.h>
+	#include <unistd.h>
+	#include "global_define.h"
 
 typedef struct {
 	char *name;

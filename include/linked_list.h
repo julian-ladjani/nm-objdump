@@ -6,17 +6,17 @@
 */
 
 #ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+	#define LINKED_LIST_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+	#include <unistd.h>
+	#include <stdlib.h>
+	#include <string.h>
 
-#define LIST_END (-1)
-#define LIST_FIRST 0
-#define LIST_ALL (-2)
-#define LIST_BEFORE (-3)
-#define LIST_AFTER (-4)
+	#define LIST_END (-1)
+	#define LIST_FIRST 0
+	#define LIST_ALL (-2)
+	#define LIST_BEFORE (-3)
+	#define LIST_AFTER (-4)
 
 typedef enum {
 	LIST_NOT_RELEASABLE,
@@ -36,7 +36,7 @@ typedef struct list_s {
 
 void list_dump(list_t *list, void (*dump_function)(void *));
 list_t *list_sort(list_t *list,
-		  int (*comp_function)(const void *, const void *));
+	int (*comp_function)(const void *, const void *));
 int list_size(list_t *list);
 void list_swap(list_t *a, list_t *b);
 
@@ -50,11 +50,11 @@ list_t *list_split(list_t *list, int pos);
 list_t *list_create(void *elem);
 list_t *list_add_elem_at_pos(list_t *list, void *elem, int pos);
 list_t *list_add_elem_at_pos_alloc(list_t *list, void *elem, int pos,
-				   size_t elem_size);
+	size_t elem_size);
 list_t *list_add_tab(list_t *list, list_byte_t *tab, size_t elem_size,
-		     size_t nb_elem);
+	size_t nb_elem);
 list_t *list_add_elem_at_pos_releasably(list_t *list, void *elem, int pos,
-					list_releasably_t releasably);
+	list_releasably_t releasably);
 
 //delete
 
@@ -63,7 +63,7 @@ list_t *list_delete_before(list_t *elem, void (*clean_func)(void *elem));
 list_t *list_delete_elem(list_t *elem, void (*clean_func)(void *elem));
 list_t *list_delete_all(list_t *list, void (*clean_func)(void *elem));
 list_t *list_delete_at_pos(list_t *list, int pos,
-			   void (*clean_func)(void *elem));
+	void (*clean_func)(void *elem));
 
 //clean
 

@@ -41,7 +41,7 @@ void list_swap(list_t *a, list_t *b)
 }
 
 list_t *list_sort(list_t *list,
-		  int (*comp_function)(const void *, const void *))
+	int (*comp_function)(const void *, const void *))
 {
 	list_t *elem;
 	int cmp;

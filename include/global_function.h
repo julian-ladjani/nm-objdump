@@ -6,12 +6,13 @@
 */
 
 #ifndef PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
-#define PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
 
-#include <elf.h>
-#include "linked_list.h"
-#include "global_struct.h"
-#include "global_define.h"
+	#define PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
+
+	#include <elf.h>
+	#include "linked_list.h"
+	#include "global_struct.h"
+	#include "global_define.h"
 
 int get_next_file(char **file_path_tab, int tab_size, int *offset);
 
@@ -21,24 +22,23 @@ void *get_section_header(void *elf, elf_header_t *info);
 void *get_section(void *elf, elf_header_t *info, int index);
 void *get_next_symbol_section(void *elf, elf_header_t *info, int *offset);
 void *get_next_symbol(void *elf,
-		      void *symbol_section,
-		      elf_header_t *info,
-		      int *offset);
+	void *symbol_section,
+	elf_header_t *info,
+	int *offset);
 
 char *get_section_name(void *elf, elf_header_t *info, int offset);
-char *get_symbol_name(void *elf,
-		      elf_header_t *info,
-		      int symbol_index,
-		      int name_index);
+char *get_symbol_name(void *elf, elf_header_t *info,
+	int symbol_index,
+	int name_index);
 char *get_string_only_letter(char *str);
 
 Elf64_Ehdr *get_file_header(void *buf);
 symbol_t *get_symbol_struct(void *elf,
-			    elf_header_t *info,
-			    void *symbol_section,
-			    int section_index);
+	elf_header_t *info,
+	void *symbol_section,
+	int section_index);
 list_t *get_symbol_list(void *elf,
-			elf_header_t *info);
+	elf_header_t *info);
 int count_file(char **file_path_tab, int tab_size);
 int char_is_letter(char c);
 int check_file(int fd, elf_header_t *info);
