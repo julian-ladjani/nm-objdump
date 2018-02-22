@@ -30,26 +30,23 @@ static symbol_t *get_symbol_struct_high(void *elf,
 	int section_index)
 {
 	Elf64_Sym *high_symbol;
-	int offset_sym = 0;
+	int off_sym = 0;
 	symbol_t *symbol = malloc(
 		sizeof(symbol_t) * get_symbol_number(symbol_section, info));
 
 	if (symbol == NULL)
 		return (PTR_ERROR_RETURN);
-	high_symbol = get_next_symbol(elf, symbol_section, info,
-		&offset_sym);
+	high_symbol = get_next_symbol(elf, symbol_section, info, &off_sym);
 	for (int idx = 0; high_symbol != PTR_END_RETURN; idx++) {
 		symbol[idx].address = high_symbol->st_value;
 		symbol[idx].info = high_symbol->st_info;
 		symbol[idx].type = get_type_high(high_symbol,
-			get_section_header(elf, info),
-			info);
+			get_section_header(elf, info), info);
 		symbol[idx].architecture = info->architecture;
 		symbol[idx].name = get_symbol_name(elf, info,
-			section_index,
-			high_symbol->st_name);
+			section_index, high_symbol->st_name);
 		high_symbol = get_next_symbol(elf, symbol_section, info,
-			&offset_sym);
+			&off_sym);
 	}
 	return (symbol);
 }
@@ -60,26 +57,23 @@ static symbol_t *get_symbol_struct_low(void *elf,
 	int section_index)
 {
 	Elf32_Sym *low_symbol;
-	int offset_sym = 0;
+	int off_sym = 0;
 	symbol_t *symbol = malloc(
 		sizeof(symbol_t) * get_symbol_number(symbol_section, info));
 
 	if (symbol == NULL)
 		return (PTR_ERROR_RETURN);
-	low_symbol = get_next_symbol(elf, symbol_section, info,
-		&offset_sym);
+	low_symbol = get_next_symbol(elf, symbol_section, info, &off_sym);
 	for (int idx = 0; low_symbol != PTR_END_RETURN; idx++) {
 		symbol[idx].address = low_symbol->st_value;
 		symbol[idx].info = low_symbol->st_info;
 		symbol[idx].type = get_type_low(low_symbol,
-			get_section_header(elf, info),
-			info);
+			get_section_header(elf, info), info);
 		symbol[idx].architecture = info->architecture;
 		symbol[idx].name = get_symbol_name(elf, info,
-			section_index,
-			low_symbol->st_name);
+			section_index, low_symbol->st_name);
 		low_symbol = get_next_symbol(elf, symbol_section, info,
-			&offset_sym);
+			&off_sym);
 	}
 	return (symbol);
 }

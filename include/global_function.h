@@ -7,8 +7,6 @@
 
 #ifndef PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
 
-	#define PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
-
 	#include <elf.h>
 	#include "linked_list.h"
 	#include "global_struct.h"
@@ -46,5 +44,7 @@ char get_type_high(Elf64_Sym *sym, Elf64_Shdr *shdr, elf_header_t *info);
 char get_type_low(Elf32_Sym *sym, Elf32_Shdr *shdr, elf_header_t *info);
 int get_symbol_number(void *symbol_section, elf_header_t *info);
 int compare_symbol(void const *a, void const *b);
+
+	#define PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H
 
 #endif //PSU_2017_NMOBJDUMP_GLOBAL_FUNCTION_H

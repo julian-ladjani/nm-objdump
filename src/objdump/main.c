@@ -23,10 +23,11 @@ void print_list(void *elem)
 	int nb_address_char = 0;
 
 	if (symbol->name != NULL && symbol->info != 4) {
-		nb_address_char = (symbol->architecture == VAL64BITS) ? 16 : 8;
+		nb_address_char =
+			(symbol->architecture == VAL64BITS) ? 16 : 8;
 		if (symbol->address != 0)
 			printf("%0*lx ", nb_address_char,
-			       symbol->address);
+				symbol->address);
 		else
 			printf("%*s ", nb_address_char, "");
 		printf("%c ", symbol->type);
@@ -35,7 +36,7 @@ void print_list(void *elem)
 }
 
 void print_file(__attribute((unused)) elf_header_t *info,
-		__attribute((unused)) int nb_file)
+	__attribute((unused)) int nb_file)
 {
 }
 

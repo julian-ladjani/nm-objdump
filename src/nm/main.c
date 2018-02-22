@@ -24,7 +24,8 @@ void print_list(void *elem)
 	int nb_address_char = 0;
 
 	if (symbol->name != NULL && symbol->info != 4) {
-		nb_address_char = (symbol->architecture == VAL64BITS) ? 16 : 8;
+		nb_address_char =
+			(symbol->architecture == VAL64BITS) ? 16 : 8;
 		if (symbol->type != 'w' && symbol->type != 'U' &&
 			symbol->type != 'u')
 			printf("%0*lx ", nb_address_char,
@@ -44,8 +45,7 @@ void print_file(elf_header_t *info, int nb_file)
 		info->endianness != BIGENDIAN) {
 		list = get_symbol_list(info->buffer, info);
 		if (list != NULL && list != PTR_ERROR_RETURN) {
-			if (nb_file > 1)
-				printf("%s:\n", info->file_path);
+			printf((nb_file > 1) ? "%s:\n" : "", info->file_path);
 			list_dump(list, print_list);
 			list_delete_all(list, clean_func);
 		}

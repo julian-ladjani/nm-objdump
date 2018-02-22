@@ -6,17 +6,17 @@
 */
 
 #ifndef LINKED_LIST_H
+
+	#define LIST_END (-1)
 	#define LINKED_LIST_H
+	#define LIST_FIRST (0)
+	#define LIST_ALL (-2)
+	#define LIST_BEFORE (-3)
+	#define LIST_AFTER (-4)
 
 	#include <unistd.h>
 	#include <stdlib.h>
 	#include <string.h>
-
-	#define LIST_END (-1)
-	#define LIST_FIRST 0
-	#define LIST_ALL (-2)
-	#define LIST_BEFORE (-3)
-	#define LIST_AFTER (-4)
 
 typedef enum {
 	LIST_NOT_RELEASABLE,
