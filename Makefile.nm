@@ -4,9 +4,9 @@ RM = rm -f
 
 CFLAGS += -D PROGRAM_NAME=\"$(NAME)\" -I include/ -Wall -Wextra
 
-CPPFLAGS += -I include/ -Wall -Wextra
+CPPFLAGS += -D PROGRAM_NAME=\"$(NAME)\" -I include/ -Wall -Wextra
 
-NAME = nm
+NAME = my_nm
 
 SRCS 	= 	src/fill_symbol_struct.c					\
 			src/get_header.c							\

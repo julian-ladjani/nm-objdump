@@ -5,7 +5,7 @@ kernel_include/*
 .DS_STORE
 CMake*
 cmake*
-nm
+my_nm
 my_objdump
 a.out
 *.txt
