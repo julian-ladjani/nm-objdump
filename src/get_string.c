@@ -23,13 +23,13 @@ static char *get_section_name_table(void *elf, elf_header_t *info)
 		if (low_elf->e_shstrndx == SHN_UNDEF)
 			return (PTR_ERROR_RETURN);
 		low_bits_struct = get_section(elf, info,
-					      (int) low_elf->e_shstrndx);
+			(int) low_elf->e_shstrndx);
 		return ((char *) elf + low_bits_struct->sh_offset);
 	}
 	if (high_elf->e_shstrndx == SHN_UNDEF)
 		return (PTR_ERROR_RETURN);
 	high_bits_struct = get_section(elf, info,
-				       (int) high_elf->e_shstrndx);
+		(int) high_elf->e_shstrndx);
 	return ((char *) elf + high_bits_struct->sh_offset);
 }
 
@@ -50,19 +50,19 @@ char *get_symbol_name_table(void *elf, elf_header_t *info, int index)
 	if (info->architecture == VAL32BITS) {
 		low_bits_struct = get_section(elf, info, index);
 		low_bits_struct = get_section(elf, info,
-					      low_bits_struct->sh_link);
+			low_bits_struct->sh_link);
 		return ((char *) ((uintptr_t) (low_bits_struct->sh_offset)));
 	}
 	high_bits_struct = get_section(elf, info, index);
 	high_bits_struct = get_section(elf, info,
-				       high_bits_struct->sh_link);
+		high_bits_struct->sh_link);
 	return ((char *) ((uintptr_t) (high_bits_struct->sh_offset)));
 }
 
 char *get_symbol_name(void *elf,
-		      elf_header_t *info,
-		      int symbol_index,
-		      int name_index)
+	elf_header_t *info,
+	int symbol_index,
+	int name_index)
 {
 	char *str_p = get_symbol_name_table(elf, info, symbol_index);
 

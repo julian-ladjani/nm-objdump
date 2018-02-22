@@ -55,22 +55,22 @@ static char get_type_shdr_low(Elf32_Sym *sym, Elf32_Shdr *shdr, char c)
 			return ('B');
 	if ((&shdr[sym->st_shndx])->sh_type == SHT_PROGBITS) {
 		if ((&shdr[sym->st_shndx])->sh_flags ==
-		    (SHF_ALLOC + SHF_WRITE))
+			(SHF_ALLOC + SHF_WRITE))
 			return ('D');
 		if ((&shdr[sym->st_shndx])->sh_flags == (SHF_ALLOC +
-							 SHF_EXECINSTR))
+			SHF_EXECINSTR))
 			return ('T');
 		return ('R');
 	}
 	if ((&shdr[sym->st_shndx])->sh_type == SHT_DYNAMIC &&
-	    (&shdr[sym->st_shndx])->sh_flags == (SHF_ALLOC + SHF_WRITE))
+		(&shdr[sym->st_shndx])->sh_flags == (SHF_ALLOC + SHF_WRITE))
 		return ('D');
 	return ('T');
 }
 
 char get_type_low(Elf32_Sym *sym,
-		  Elf32_Shdr *shdr,
-		  __attribute__((unused)) elf_header_t *info)
+	Elf32_Shdr *shdr,
+	__attribute__((unused)) elf_header_t *info)
 {
 	char c = INT_CONTINUE;
 

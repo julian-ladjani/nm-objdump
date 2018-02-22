@@ -14,7 +14,7 @@ int char_is_letter(char c)
 	if (c == '\0')
 		return (0);
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
-	    (c >= '0' && c <= '0'))
+		(c >= '0' && c <= '0'))
 		return (1);
 	return (2);
 }

@@ -20,7 +20,7 @@ int count_file(char **file_path_tab, int tab_size)
 
 	for (int idx = 0; idx < tab_size; idx++) {
 		if (file_path_tab[idx] != NULL &&
-		    file_path_tab[idx][0] != '-')
+			file_path_tab[idx][0] != '-')
 			nb_file++;
 	}
 	return (nb_file);
@@ -37,7 +37,7 @@ int open_file(char *file_path)
 		if (strcmp(error_string, "No such file or directory") == 0)
 			error_string = "No such file";
 		printf("%s: '%s': %s\n", PROGRAM_NAME, file_path,
-		       error_string);
+			error_string);
 		return (INT_ERROR_RETURN);
 	}
 	return (fd);
@@ -47,7 +47,7 @@ static int check_file_type(struct stat *s, char *file_path)
 {
 	if (!S_ISREG(s->st_mode)) {
 		printf("%s: Warning: '%s' %s\n", PROGRAM_NAME, file_path,
-		       "is not an ordinary file");
+			"is not an ordinary file");
 		return (INT_ERROR_RETURN);
 	}
 	return (0);
@@ -63,12 +63,12 @@ void *read_file(int fd, char *file_path)
 		error = fstat(fd, &s);
 		if (error == -1)
 			printf("%s: '%s' %s\n", PROGRAM_NAME, file_path,
-			       strerror(errno));
+				strerror(errno));
 		else
 			error = check_file_type(&s, file_path);
 		if (error == 0)
 			buf = mmap(NULL, s.st_size, PROT_READ,
-				   MAP_PRIVATE, fd, 0);
+				MAP_PRIVATE, fd, 0);
 		if (buf == MAP_FAILED || ((char *) buf)[0] == 0)
 			return (PTR_ERROR_RETURN);
 		return (buf);
@@ -91,7 +91,7 @@ int get_next_file(char **file_path_tab, int tab_size, int *offset)
 			fd = open_file(DEFAULT_FILE);
 			return fd;
 		} else if (file_path_tab[idx] != NULL &&
-			   file_path_tab[idx][0] != '-') {
+			file_path_tab[idx][0] != '-') {
 			fd = open_file(file_path_tab[idx]);
 			return fd;
 		}
