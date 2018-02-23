@@ -7,37 +7,48 @@
 
 #include <stdio.h>
 #include "global_struct.h"
-#include "global_function.h"
+#include "objdump_function.h"
 
-void clean_func(void *symbol_void)
+void clean_func(void *section_void)
 {
-	symbol_t *symbol = symbol_void;
+	section_t *section = section_void;
 
-	if (symbol != NULL)
-		free(symbol);
+	if (section != NULL)
+		free(section);
 }
 
-void print_list(void *elem)
+void print_header_low(elf_header_t *info)
 {
-	symbol_t *symbol = (symbol_t *) elem;
-	int nb_address_char = 0;
+	Elf32_Ehdr *elf = (Elf32_Ehdr *) info->buffer;
 
-	if (symbol->name != NULL && symbol->info != 4) {
-		nb_address_char =
-			(symbol->architecture == VAL64BITS) ? 16 : 8;
-		if (symbol->address != 0)
-			printf("%0*lx ", nb_address_char,
-				symbol->address);
-		else
-			printf("%*s ", nb_address_char, "");
-		printf("%c ", symbol->type);
-		printf("%s\n", symbol->name);
-	}
+	printf("\n%s:%5cfile format %s-%s\n", info->file_path, ' ',
+		"elf32", get_elf_sub_format_low(elf));
+	printf("architecture: %s, flags 0x%08x:\n\n",
+		get_elf_architecture_low(elf), elf->e_flags);
+	printf("start address 0x%08x\n\n", elf->e_entry);
+}
+
+void print_header_high(elf_header_t *info)
+{
+	Elf64_Ehdr *elf = (Elf64_Ehdr *) info->buffer;
+
+	printf("\n%s:%5cfile format %s-%s\n", info->file_path, ' ',
+		"elf64", get_elf_sub_format_high(elf));
+	printf("architecture: %s, flags 0x%08x:\n\n",
+		get_elf_architecture_high(elf), elf->e_flags);
+	printf("start address 0x%08x\n\n", elf->e_entry);
 }
 
 void print_file(__attribute((unused)) elf_header_t *info,
 	__attribute((unused)) int nb_file)
 {
+	if (info->architecture == VAL32BITS)
+		print_header_low(info);
+	else
+		print_header_high(info);
+	list_t *list = get_section_list(info);
+	list_dump(list, print_list);
+	list_delete_all(list, clean_func);
 }
 
 int main(int ac, char **av)

@@ -14,6 +14,7 @@ SRCS 	= 	src/fill_symbol_struct.c					\
 			src/get_string.c							\
 			src/get_symbol.c 							\
 			src/get_symbol_list.c						\
+			src/get_elf_format.c						\
 			src/get_symbol_struct.c						\
 			src/get_type_high.c							\
 			src/get_type_low.c							\

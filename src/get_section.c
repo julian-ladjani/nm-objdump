@@ -10,6 +10,16 @@
 #include "global_define.h"
 #include "global_function.h"
 
+int get_section_number(elf_header_t *info)
+{
+	Elf64_Ehdr *elf_high = (Elf64_Ehdr *) info->buffer;
+	Elf32_Ehdr *elf_low = (Elf32_Ehdr *) info->buffer;
+
+	if (info->architecture == VAL32BITS)
+		return (elf_low->e_shnum - 1);
+	return (elf_high->e_shnum - 1);
+}
+
 void *get_section(void *elf, elf_header_t *info, int index)
 {
 	Elf32_Shdr *low_bits_struct;

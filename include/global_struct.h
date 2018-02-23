@@ -30,4 +30,12 @@ typedef struct {
 	off_t size;
 } elf_header_t;
 
+typedef struct {
+	char *name;
+	size_t *size;
+	uintptr_t address;
+	unsigned char *data;
+	data_unit_t architecture;
+} section_t;
+
 #endif //PSU_2017_NMOBJDUMP_GLOBAL_STRUCT_H

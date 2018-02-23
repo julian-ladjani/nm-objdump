@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -g
 
 RM = rm -f
 
@@ -14,6 +14,9 @@ SRCS 	= 	src/fill_symbol_struct.c					\
 			src/get_string.c							\
 			src/get_symbol.c 							\
 			src/get_symbol_list.c						\
+			src/get_section_list.c						\
+			src/get_section_struct.c					\
+			src/get_elf_format.c						\
 			src/get_symbol_struct.c						\
 			src/get_type_high.c							\
 			src/get_type_low.c							\
@@ -21,6 +24,7 @@ SRCS 	= 	src/fill_symbol_struct.c					\
 			src/read_file.c								\
 			src/string_generic_function.c				\
 			src/objdump/main.c 							\
+			src/objdump/print_content.c 				\
 			src/linked_list/linked_list_add.c			\
 			src/linked_list/linked_list_advanced.c 		\
 			src/linked_list/linked_list_basic.c 		\
