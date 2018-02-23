@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <global_struct.h>
 #include "global_struct.h"
 #include "global_function.h"
 
@@ -36,6 +37,7 @@ int check_file(int fd, elf_header_t *info)
 	Elf64_Ehdr *elf;
 
 	info->buffer = read_file(fd, info->file_path);
+	info->flags = 0;
 	if (info->buffer == PTR_ERROR_RETURN)
 		return (INT_ERROR_RETURN);
 	elf = (Elf64_Ehdr *) info->buffer;

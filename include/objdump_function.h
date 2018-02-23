@@ -11,6 +11,7 @@
 
 	#define PSU_2017_NMOBJDUMP_OBJDUMP_FUNCTION_H
 
+void get_flags_string(int flags);
 void print_list(void *elem);
 
 #endif //PSU_2017_NMOBJDUMP_OBJDUMP_FUNCTION_H

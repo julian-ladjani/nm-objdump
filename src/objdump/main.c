@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <global_struct.h>
 #include "global_struct.h"
 #include "objdump_function.h"
 
@@ -23,8 +24,9 @@ void print_header_low(elf_header_t *info)
 
 	printf("\n%s:%5cfile format %s-%s\n", info->file_path, ' ',
 		"elf32", get_elf_sub_format_low(elf));
-	printf("architecture: %s, flags 0x%08x:\n\n",
-		get_elf_architecture_low(elf), elf->e_flags);
+	printf("architecture: %s, flags 0x%08x:\n",
+		get_elf_architecture_low(elf), info->flags);
+	get_flags_string(info->flags);
 	printf("start address 0x%08x\n\n", elf->e_entry);
 }
 
@@ -34,9 +36,10 @@ void print_header_high(elf_header_t *info)
 
 	printf("\n%s:%5cfile format %s-%s\n", info->file_path, ' ',
 		"elf64", get_elf_sub_format_high(elf));
-	printf("architecture: %s, flags 0x%08x:\n\n",
-		get_elf_architecture_high(elf), elf->e_flags);
-	printf("start address 0x%08lx\n\n", elf->e_entry);
+	printf("architecture: %s, flags 0x%08x:\n",
+		get_elf_architecture_high(elf), info->flags);
+	get_flags_string(info->flags);
+	printf("start address 0x%016lx\n\n", elf->e_entry);
 }
 
 void print_file(__attribute((unused)) elf_header_t *info,

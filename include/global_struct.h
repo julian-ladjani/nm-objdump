@@ -25,6 +25,7 @@ typedef struct {
 	byte_t *buffer;
 	char *file_path;
 	int fd;
+	unsigned int flags;
 	data_unit_t architecture;
 	endianness_t endianness;
 	off_t size;

@@ -30,6 +30,37 @@ static void print_list_ascii(section_t *section, int index, int index_start)
 	printf("\n");
 }
 
+static void print_flag_string(int *flags,
+	int flag,
+	char *flag_string,
+	int *comma)
+{
+	char *comma_string = "";
+
+	if (*comma == 1)
+		comma_string = ", ";
+	if (*flags & flag) {
+		printf("%s%s", comma_string, flag_string);
+		*comma = 1;
+	}
+}
+
+void get_flags_string(int flags)
+{
+	int comma = 0;
+
+	print_flag_string(&flags, HAS_RELOC, "HAS_RELOC", &comma);
+	print_flag_string(&flags, EXEC_P, "EXEC_P", &comma);
+	print_flag_string(&flags, HAS_LINENO, "HAS_LINENO", &comma);
+	print_flag_string(&flags, HAS_DEBUG, "HAS_DEBUG", &comma);
+	print_flag_string(&flags, HAS_SYMS, "HAS_SYMS", &comma);
+	print_flag_string(&flags, HAS_LOCALS, "HAS_LOCALS", &comma);
+	print_flag_string(&flags, DYNAMIC, "DYNAMIC", &comma);
+	print_flag_string(&flags, WP_TEXT, "WP_TEXT", &comma);
+	print_flag_string(&flags, D_PAGED, "D_PAGED", &comma);
+	printf("\n");
+}
+
 static int check_section(section_t *section)
 {
 	if (section->size != 0 &&
