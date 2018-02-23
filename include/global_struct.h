@@ -32,7 +32,7 @@ typedef struct {
 
 typedef struct {
 	char *name;
-	size_t *size;
+	size_t size;
 	uintptr_t address;
 	unsigned char *data;
 	data_unit_t architecture;

@@ -45,7 +45,7 @@ static int check_section(section_t *section)
 void print_list(void *elem)
 {
 	section_t *section = (section_t *) elem;
-	int i = 0;
+	unsigned int i = 0;
 	int i_start = i;
 
 	if (check_section(elem) == 0)

@@ -36,7 +36,7 @@ void print_header_high(elf_header_t *info)
 		"elf64", get_elf_sub_format_high(elf));
 	printf("architecture: %s, flags 0x%08x:\n\n",
 		get_elf_architecture_high(elf), elf->e_flags);
-	printf("start address 0x%08x\n\n", elf->e_entry);
+	printf("start address 0x%08lx\n\n", elf->e_entry);
 }
 
 void print_file(__attribute((unused)) elf_header_t *info,
@@ -44,11 +44,11 @@ void print_file(__attribute((unused)) elf_header_t *info,
 {
 	if (info->buffer != PTR_ERROR_RETURN &&
 		info->endianness != BIGENDIAN) {
+		list_t *list = get_section_list(info);
 		if (info->architecture == VAL32BITS)
 			print_header_low(info);
 		else
 			print_header_high(info);
-		list_t *list = get_section_list(info);
 		list_dump(list, print_list);
 		list_delete_all(list, clean_func);
 	}

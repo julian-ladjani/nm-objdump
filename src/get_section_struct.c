@@ -22,10 +22,10 @@ static section_t *get_section_struct_low(elf_header_t *info)
 	for (int i = 1; i <= nb_section; i++) {
 		section = get_section(info->buffer, info, i);
 		section_struct[i - 1].name = get_section_name(info->buffer,
-			info, (char *) section->sh_name);
+			info, section->sh_name);
 		section_struct[i - 1].address = section->sh_addr;
 		section_struct[i - 1].data =
-			info->buffer + section->sh_offset;
+			(unsigned char *) info->buffer + section->sh_offset;
 		section_struct[i - 1].size = section->sh_size;
 	}
 	return (section_struct);
@@ -43,10 +43,10 @@ static section_t *get_section_struct_high(elf_header_t *info)
 	for (int i = 1; i <= nb_section; i++) {
 		section = get_section(info->buffer, info, i);
 		section_struct[i - 1].name = get_section_name(info->buffer,
-			info, (char *) section->sh_name);
+			info, section->sh_name);
 		section_struct[i - 1].address = section->sh_addr;
 		section_struct[i - 1].data =
-			info->buffer + section->sh_offset;
+			(unsigned char *) info->buffer + section->sh_offset;
 		section_struct[i - 1].size = section->sh_size;
 	}
 	return (section_struct);
