@@ -59,19 +59,19 @@ int main(int ac, char **av)
 	int file_index = 0;
 	int fd;
 	elf_header_t info;
-	int error = 0;
+	int return_value = 0;
 
 	fd = get_next_file(av, ac, &av_offset);
 	while (fd != INT_END_RETURN) {
 		file_index++;
 		info.file_path = (ac < 2) ? DEFAULT_FILE : av[av_offset - 1];
-		if (fd != INT_ERROR_RETURN)
-			error = check_file(fd, &info);
-		if (fd != INT_ERROR_RETURN && error == 0) {
+		if (fd != INT_ERROR_RETURN && check_file(fd, &info) == 0) {
 			if (file_index != 1)
 				printf("\n");
 			print_file(&info, nb_file);
-		}
+		} else
+			return_value = PROGRAM_ERROR_EXIT;
 		fd = get_next_file(av, ac, &av_offset);
 	}
+	return (return_value);
 }

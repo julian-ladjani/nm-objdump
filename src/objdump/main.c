@@ -42,13 +42,16 @@ void print_header_high(elf_header_t *info)
 void print_file(__attribute((unused)) elf_header_t *info,
 	__attribute((unused)) int nb_file)
 {
-	if (info->architecture == VAL32BITS)
-		print_header_low(info);
-	else
-		print_header_high(info);
-	list_t *list = get_section_list(info);
-	list_dump(list, print_list);
-	list_delete_all(list, clean_func);
+	if (info->buffer != PTR_ERROR_RETURN &&
+		info->endianness != BIGENDIAN) {
+		if (info->architecture == VAL32BITS)
+			print_header_low(info);
+		else
+			print_header_high(info);
+		list_t *list = get_section_list(info);
+		list_dump(list, print_list);
+		list_delete_all(list, clean_func);
+	}
 }
 
 int main(int ac, char **av)
@@ -58,19 +61,17 @@ int main(int ac, char **av)
 	int file_index = 0;
 	int fd;
 	elf_header_t info;
-	int error = 0;
+	int return_value = 0;
 
 	fd = get_next_file(av, ac, &av_offset);
 	while (fd != INT_END_RETURN) {
 		file_index++;
 		info.file_path = (ac < 2) ? DEFAULT_FILE : av[av_offset - 1];
-		if (fd != INT_ERROR_RETURN)
-			error = check_file(fd, &info);
-		if (fd != INT_ERROR_RETURN && error == 0) {
-			if (file_index != 1)
-				printf("\n");
+		if (fd != INT_ERROR_RETURN && check_file(fd, &info) == 0)
 			print_file(&info, nb_file);
-		}
+		else
+			return_value = PROGRAM_ERROR_EXIT;
 		fd = get_next_file(av, ac, &av_offset);
 	}
+	return (return_value);
 }
