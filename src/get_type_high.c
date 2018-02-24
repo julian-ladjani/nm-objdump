@@ -76,7 +76,7 @@ static char get_type_st_shndx_high(Elf64_Sym *sym, char c)
 static char get_type_shdr_high(Elf64_Sym *sym, Elf64_Shdr *shdr, char c)
 {
 	const symbol_type_t *type = symbol_type;
-	int size = 21;
+	int size = 24;
 
 	if (c != INT_CONTINUE)
 		return (c);
