@@ -21,7 +21,6 @@ static const symbol_type_t symbol_type[] = {
 	{SHT_PROGBITS,   STT_NOTYPE, 3,    'D'},
 	{SHT_DYNAMIC,    STT_OBJECT, 3,    'D'},
 	{SHT_PROGBITS,   STT_OBJECT, 3,    'D'},
-	{SHT_NOBITS,     STT_OBJECT, 3,    'D'},
 	{SHT_PROGBITS,   STT_TLS,    1027, 'D'},
 	{SHT_PROGBITS,   STT_NOTYPE, 6,    'T'},
 	{SHT_FINI_ARRAY, STT_NOTYPE, 3,    'T'},
@@ -76,7 +75,7 @@ static char get_type_st_shndx_high(Elf64_Sym *sym, char c)
 static char get_type_shdr_high(Elf64_Sym *sym, Elf64_Shdr *shdr, char c)
 {
 	const symbol_type_t *type = symbol_type;
-	int size = 24;
+	int size = 23;
 
 	if (c != INT_CONTINUE)
 		return (c);
