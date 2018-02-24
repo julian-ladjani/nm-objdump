@@ -6,8 +6,35 @@
 */
 
 #include <elf.h>
-#include "global_define.h"
+#include "global_struct.h"
 #include "global_function.h"
+
+static const symbol_type_t symbol_type[] = {
+	{SHT_NULL,       STT_FUNC,   0,    'U'},
+	{SHT_PROGBITS,   STT_NOTYPE, 0,    'N'},
+	{SHT_PROGBITS,   STT_OBJECT, 0,    'N'},
+	{SHT_PROGBITS,   STT_NOTYPE, 2,    'R'},
+	{SHT_PROGBITS,   STT_NOTYPE, 50,   'R'},
+	{SHT_PROGBITS,   STT_OBJECT, 2,    'R'},
+	{SHT_PROGBITS,   STT_OBJECT, 50,   'R'},
+	{SHT_NOTE,       STT_OBJECT, 2,    'R'},
+	{SHT_PROGBITS,   STT_NOTYPE, 3,    'D'},
+	{SHT_DYNAMIC,    STT_OBJECT, 3,    'D'},
+	{SHT_PROGBITS,   STT_OBJECT, 3,    'D'},
+	{SHT_NOBITS,     STT_OBJECT, 3,    'D'},
+	{SHT_PROGBITS,   STT_TLS,    1027, 'D'},
+	{SHT_PROGBITS,   STT_NOTYPE, 6,    'T'},
+	{SHT_FINI_ARRAY, STT_NOTYPE, 3,    'T'},
+	{SHT_INIT_ARRAY, STT_NOTYPE, 3,    'T'},
+	{SHT_FINI_ARRAY, STT_OBJECT, 3,    'T'},
+	{SHT_INIT_ARRAY, STT_OBJECT, 3,    'T'},
+	{SHT_PROGBITS,   STT_FUNC,   6,    'T'},
+	{SHT_NOBITS,     STT_OBJECT, 3,    'B'},
+	{SHT_NOBITS,     STT_NOTYPE, 3,    'B'},
+	{SHT_NOBITS,     STT_TLS,    1027, 'B'},
+	{SHT_PROGBITS, STT_LOOS,     6,    'I'},
+	{SHT_PROGBITS, STT_LOOS,     6,    'I'},
+};
 
 static char get_type_st_bind_high(Elf64_Sym *sym, char c)
 {
@@ -48,24 +75,18 @@ static char get_type_st_shndx_high(Elf64_Sym *sym, char c)
 
 static char get_type_shdr_high(Elf64_Sym *sym, Elf64_Shdr *shdr, char c)
 {
+	const symbol_type_t *type = symbol_type;
+	int size = 21;
+
 	if (c != INT_CONTINUE)
 		return (c);
-	if ((&shdr[sym->st_shndx])->sh_type == SHT_NOBITS)
-		if (shdr[sym->st_shndx].sh_flags == (SHF_ALLOC + SHF_WRITE))
-			return ('B');
-	if ((&shdr[sym->st_shndx])->sh_type == SHT_PROGBITS) {
-		if ((&shdr[sym->st_shndx])->sh_flags ==
-			(SHF_ALLOC + SHF_WRITE))
-			return ('D');
-		if ((&shdr[sym->st_shndx])->sh_flags == (SHF_ALLOC +
-			SHF_EXECINSTR))
-			return ('T');
-		return ('R');
+	for (int i = 0; i < size; i++) {
+		if (ELF64_ST_TYPE(sym->st_info) == type[i].stt_type &&
+			shdr[sym->st_shndx].sh_type == type[i].type &&
+			shdr[sym->st_shndx].sh_flags == type[i].flags)
+			return (type[i].value);
 	}
-	if ((&shdr[sym->st_shndx])->sh_type == SHT_DYNAMIC &&
-		(&shdr[sym->st_shndx])->sh_flags == (SHF_ALLOC + SHF_WRITE))
-		return ('D');
-	return ('T');
+	return (INT_CONTINUE);
 }
 
 char get_type_high(Elf64_Sym *sym,

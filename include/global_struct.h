@@ -32,6 +32,13 @@ typedef struct {
 } elf_header_t;
 
 typedef struct {
+	unsigned int type;
+	unsigned int stt_type;
+	unsigned int flags;
+	char value;
+} symbol_type_t;
+
+typedef struct {
 	char *name;
 	size_t size;
 	uintptr_t address;

@@ -6,12 +6,8 @@
 */
 
 #include <stdlib.h>
-#include <string.h>
-#include <global_struct.h>
-#include "linked_list.h"
 #include "global_define.h"
 #include "global_function.h"
-#include "global_struct.h"
 
 int get_symbol_number(void *symbol_section, elf_header_t *info)
 {

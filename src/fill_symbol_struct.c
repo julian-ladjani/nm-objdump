@@ -48,7 +48,5 @@ int compare_symbol(void const *a, void const *b)
 	if (pb->name == NULL)
 		return (-1);
 	cmp = strcmp_alphanum(pa->name, pb->name);
-	if (cmp == 0)
-		return ((int) strlen(pa->name) - (int) strlen(pb->name));
 	return (cmp);
 }
