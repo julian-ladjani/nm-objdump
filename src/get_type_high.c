@@ -33,7 +33,7 @@ static const symbol_type_t symbol_type[] = {
 	{SHT_NOBITS,     STT_NOTYPE, 3,    'B'},
 	{SHT_NOBITS,     STT_TLS,    1027, 'B'},
 	{SHT_PROGBITS, STT_LOOS,     6,    'I'},
-	{SHT_PROGBITS, STT_LOOS,     6,    'I'},
+	{SHT_PROGBITS, STT_LOOS,     6,    'I'}
 };
 
 static char get_type_st_bind_high(Elf64_Sym *sym, char c)
