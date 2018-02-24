@@ -20,8 +20,8 @@ static void get_elf_flags_low(elf_header_t *info,
 		EXEC_P * (elf->e_type == ET_EXEC) |
 		HAS_SYMS * (section->sh_type == SHT_SYMTAB ||
 			section->sh_type == SHT_DYNSYM) |
-		DYNAMIC * (elf->e_type == ET_DYN) | D_PAGED *
-		((elf->e_type == ET_EXEC || elf->e_type == ET_DYN));
+		DYNAMIC * (elf->e_type == ET_DYN) |
+		D_PAGED * ((elf->e_type == ET_EXEC || elf->e_type == ET_DYN));
 
 	if (flags > info->flags)
 		info->flags = flags;

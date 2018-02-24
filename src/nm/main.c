@@ -44,10 +44,13 @@ void print_file(elf_header_t *info, int nb_file)
 	if (info->buffer != PTR_ERROR_RETURN &&
 		info->endianness != BIGENDIAN) {
 		list = get_symbol_list(info->buffer, info);
+		printf((nb_file > 1) ? "%s:\n" : "", info->file_path);
 		if (list != NULL && list != PTR_ERROR_RETURN) {
-			printf((nb_file > 1) ? "%s:\n" : "", info->file_path);
 			list_dump(list, print_list);
 			list_delete_all(list, clean_func);
+		} else if (list == NULL){
+			printf("%s: %s: no symbols\n", PROGRAM_NAME,
+				info->file_path);
 		}
 	}
 }
@@ -56,17 +59,15 @@ int main(int ac, char **av)
 {
 	int av_offset = 1;
 	int nb_file = count_file(av + 1, ac - 1);
-	int file_index = 0;
 	int fd;
 	elf_header_t info;
 	int return_value = 0;
 
 	fd = get_next_file(av, ac, &av_offset);
 	while (fd != INT_END_RETURN) {
-		file_index++;
 		info.file_path = (ac < 2) ? DEFAULT_FILE : av[av_offset - 1];
 		if (fd != INT_ERROR_RETURN && check_file(fd, &info) == 0) {
-			if (file_index != 1)
+			if (nb_file > 1)
 				printf("\n");
 			print_file(&info, nb_file);
 		} else
