@@ -35,7 +35,6 @@ char *get_elf_sub_format_low(Elf32_Ehdr *elf);
 char *get_elf_sub_format_high(Elf64_Ehdr *elf);
 char *get_elf_architecture_low(Elf32_Ehdr *elf);
 char *get_elf_architecture_high(Elf64_Ehdr *elf);
-Elf64_Ehdr *get_file_header(void *buf);
 section_t *get_section_struct(elf_header_t *info);
 symbol_t *get_symbol_struct(void *elf,
 	elf_header_t *info,
