@@ -7,12 +7,13 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include <global_struct.h>
+#include "global_struct.h"
 #include "objdump_function.h"
 
 static void print_list_ascii(section_t *section, int index, int index_start)
 {
 	int spaces = index;
+
 	while (spaces % 16 != 0) {
 		if (spaces % 4 == 0 && spaces % 16 > 0)
 			printf(" ");

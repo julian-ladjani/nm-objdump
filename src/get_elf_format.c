@@ -6,7 +6,6 @@
 */
 
 #include <elf.h>
-#include "global_struct.h"
 
 char *get_elf_sub_format_low(Elf32_Ehdr *elf)
 {

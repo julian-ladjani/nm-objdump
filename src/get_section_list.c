@@ -5,7 +5,6 @@
 ** 	get_section_list file
 */
 
-#include <elf.h>
 #include "linked_list.h"
 #include "global_struct.h"
 #include "global_function.h"

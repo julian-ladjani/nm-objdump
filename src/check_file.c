@@ -65,5 +65,7 @@ int check_file(int fd, elf_header_t *info)
 	info->endianness =
 		(elf->e_ident[EI_DATA] == 1) ? LITTLEENDIAN : BIGENDIAN;
 	info->end = info->buffer + info->size;
+	if (info->endianness == BIGENDIAN)
+		return (0);
 	return (check_file_size_all(info));
 }

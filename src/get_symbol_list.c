@@ -6,11 +6,8 @@
 */
 
 #include <stdlib.h>
-#include <string.h>
 #include <global_struct.h>
-#include <assert.h>
 #include "linked_list.h"
-#include "global_define.h"
 #include "global_function.h"
 #include "global_struct.h"
 
@@ -19,7 +16,6 @@ static list_t *symbol_struct_to_list(list_t *list,
 	void *symbol_section,
 	elf_header_t *info)
 {
-
 	if (symbol_struct != NULL && symbol_struct != PTR_END_RETURN
 		&& symbol_struct != PTR_ERROR_RETURN)
 		list = list_add_tab(list, (list_byte_t *) symbol_struct,

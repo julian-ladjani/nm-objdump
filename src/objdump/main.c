@@ -6,7 +6,6 @@
 */
 
 #include <stdio.h>
-#include <global_struct.h>
 #include "global_struct.h"
 #include "objdump_function.h"
 

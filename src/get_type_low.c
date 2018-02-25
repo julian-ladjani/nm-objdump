@@ -7,7 +7,6 @@
 
 #include <elf.h>
 #include "global_struct.h"
-#include "global_function.h"
 
 static const symbol_type_t symbol_type[] = {
 	{SHT_NULL,       STT_FUNC,   0,    'U'},

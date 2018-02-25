@@ -6,7 +6,6 @@
 */
 
 #include <elf.h>
-#include <global_struct.h>
 #include "global_struct.h"
 #include "global_function.h"
 

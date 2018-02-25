@@ -6,8 +6,7 @@
 */
 
 #include <elf.h>
-#include <global_struct.h>
-#include "global_define.h"
+#include "global_struct.h"
 #include "global_function.h"
 
 void *get_next_symbol_section(void *elf, elf_header_t *info, int *offset)

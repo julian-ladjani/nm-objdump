@@ -6,8 +6,7 @@
 */
 
 #include <elf.h>
-#include <global_struct.h>
-#include "global_define.h"
+#include "global_struct.h"
 #include "global_function.h"
 
 int get_section_number(elf_header_t *info)

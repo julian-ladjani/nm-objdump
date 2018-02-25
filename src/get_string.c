@@ -8,8 +8,7 @@
 #include <elf.h>
 #include <stdint.h>
 #include <unistd.h>
-#include <global_struct.h>
-#include "global_define.h"
+#include "global_struct.h"
 #include "global_function.h"
 
 static char *get_section_name_table(void *elf, elf_header_t *info)

@@ -6,7 +6,6 @@
 */
 
 #include <stdio.h>
-#include <global_struct.h>
 #include "global_struct.h"
 #include "global_function.h"
 
@@ -48,7 +47,7 @@ void print_file(elf_header_t *info, int nb_file)
 		if (list != NULL && list != PTR_ERROR_RETURN) {
 			list_dump(list, print_list);
 			list_delete_all(list, clean_func);
-		} else if (list == NULL){
+		} else if (list == NULL) {
 			printf("%s: %s: no symbols\n", PROGRAM_NAME,
 				info->file_path);
 		}
