@@ -13,7 +13,7 @@ static int check_file_size(int fd, elf_header_t *info)
 {
 	info->size = lseek(fd, 0, SEEK_END);
 	if ((off_t) info->size < (off_t) sizeof(Elf64_Ehdr)) {
-		printf("%s: %s: File truncated\n",
+		printf("%s: %s:  File format not recognized\n",
 			PROGRAM_NAME, info->file_path);
 		return (INT_ERROR_RETURN);
 	}
