@@ -16,6 +16,8 @@ static int check_all_sections(elf_header_t *info)
 	if (elf->e_ehsize + (elf->e_phnum * elf->e_phentsize) +
 		(elf->e_shnum * elf->e_shentsize) > info->size)
 		return (INT_ERROR_RETURN);
+	if ((byte_t *) shdr > info->end)
+		return (INT_ERROR_RETURN);
 	if ((byte_t *) (shdr + (elf->e_shnum)) > info->end)
 		return (INT_ERROR_RETURN);
 	return (0);

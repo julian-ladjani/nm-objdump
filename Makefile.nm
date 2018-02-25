@@ -19,6 +19,8 @@ SRCS 	= 	src/fill_symbol_struct.c					\
 			src/get_type_high.c							\
 			src/get_type_low.c							\
 			src/check_file.c							\
+			src/check_file_size_high.c					\
+			src/check_file_size_low.c					\
 			src/read_file.c								\
 			src/string_generic_function.c				\
 			src/nm/main.c 								\
