@@ -24,7 +24,9 @@ static int check_file_type(Elf64_Ehdr *elf, elf_header_t *info)
 {
 	if (elf->e_ident[EI_MAG0] != 0x7F || elf->e_ident[EI_MAG1] != 'E' ||
 		elf->e_ident[EI_MAG2] != 'L' ||
-		elf->e_ident[EI_MAG3] != 'F') {
+		elf->e_ident[EI_MAG3] != 'F' ||
+		elf->e_ident[EI_CLASS] > 2 ||
+		elf->e_ident[EI_DATA] > 2) {
 		printf("%s: %s: File format not recognized\n",
 			PROGRAM_NAME, info->file_path);
 		return (INT_ERROR_RETURN);
