@@ -29,6 +29,7 @@ typedef struct {
 	data_unit_t architecture;
 	endianness_t endianness;
 	off_t size;
+	byte_t *end;
 } elf_header_t;
 
 typedef struct {
