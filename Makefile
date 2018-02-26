@@ -1,3 +1,7 @@
+make:
+	make -f ./Makefile.nm all
+	make -f ./Makefile.objdump all
+
 nm:
 	make -f ./Makefile.nm re
 
