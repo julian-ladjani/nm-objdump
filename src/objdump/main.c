@@ -65,7 +65,6 @@ int main(int ac, char **av)
 	elf_header_t info;
 	int return_value = 0;
 
-	malloc(10000);
 	fd = get_next_file(av, ac, &av_offset);
 	while (fd != INT_END_RETURN) {
 		file_index++;
