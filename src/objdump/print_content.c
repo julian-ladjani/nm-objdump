@@ -28,6 +28,8 @@ static void print_list_ascii(section_t *section, int index, int index_start)
 			printf(".");
 		index_start++;
 	}
+	for (; index_start % 16 != 0; index_start++)
+		printf(" ");
 	printf("\n");
 }
 
