@@ -13,6 +13,7 @@ SRCS 	= 	src/fill_symbol_struct.c					\
 			src/get_section.c							\
 			src/get_string.c							\
 			src/get_symbol.c 							\
+			src/get_symbol_section.c 					\
 			src/get_symbol_list.c						\
 			src/get_section_list.c						\
 			src/get_section_struct.c					\
