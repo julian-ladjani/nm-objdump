@@ -1,3 +1,10 @@
+##
+## EPITECH PROJECT, 2018
+## nmobjdump
+## File description:
+## 	makefile
+##
+
 make:
 	make -f ./Makefile.nm all
 	make -f ./Makefile.objdump all
