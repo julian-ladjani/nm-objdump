@@ -54,6 +54,12 @@ void print_file(elf_header_t *info, int nb_file)
 	}
 }
 
+static void print_new_line(int nb_file)
+{
+	if (nb_file > 1)
+		printf("\n");
+}
+
 int main(int ac, char **av)
 {
 	int av_offset = 1;
@@ -66,8 +72,7 @@ int main(int ac, char **av)
 	while (fd != INT_END_RETURN) {
 		info.file_path = (ac < 2) ? DEFAULT_FILE : av[av_offset - 1];
 		if (fd != INT_ERROR_RETURN && check_file(fd, &info) == 0) {
-			if (nb_file > 1)
-				printf("\n");
+			print_new_line(nb_file);
 			print_file(&info, nb_file);
 		} else
 			return_value = PROGRAM_ERROR_EXIT;

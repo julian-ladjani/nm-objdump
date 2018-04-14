@@ -43,11 +43,11 @@ static char get_type_st_bind_low(Elf32_Sym *sym, char c)
 		case STB_GNU_UNIQUE:
 			return ('u');
 		case STB_WEAK:
-			if (ELF32_ST_TYPE(sym->st_info) == STT_OBJECT) {
-				if (sym->st_shndx == SHN_UNDEF)
-					return ('v');
+			if (ELF32_ST_TYPE(sym->st_info) == STT_OBJECT &&
+				sym->st_shndx == SHN_UNDEF)
+				return ('v');
+			if (ELF32_ST_TYPE(sym->st_info) == STT_OBJECT)
 				return ('V');
-			}
 			if (sym->st_shndx == SHN_UNDEF)
 				return ('w');
 			return ('W');
